@@ -1,9 +1,10 @@
 """
 Generates KML files
-by intitiating a KML class
-and calling Add point
+by intitiating a KML class--done
+and calling Add point--done
 options to add polygon by introducing coordinates in function
-requires also context opener
+requires also context opener--done
+TODO
 """
 class kmlGen:
     def __init__(self,file_name=None):
@@ -51,13 +52,17 @@ class kmlGen:
         pointsa=''.join([a for a in self.listPoints])
         self.final=self.intialXml+pointsa+self.endXml
 
-    def addPoint(self,lat,long):
+    def addPoint(self,lat,long,name):
         """
         Adds new placemarks on the kml file
         :param lat:
         :param long:
         :return:
         """
+        if name is None: name = 'Test'
+
+
+
         self.listPoints.append(f"<Placemark><name>test</name><styleUrl>#m_ylw-pushpin</styleUrl><Point><gx:drawOrder>1</gx:drawOrder><coordinates>{lat},{long},0</coordinates></Point></Placemark>")
 
     def save(self):
