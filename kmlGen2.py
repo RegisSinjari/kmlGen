@@ -22,7 +22,13 @@ if you want folder you append new dictonaries
         2222
     1111
 #####
-
+dict1={'base':[]}
+def newfolder(leaf=None,root=None):
+    if root is None:
+        dict1['base'].append({leaf: []})
+        return dict1['base'][-1][leaf]
+    root.append({leaf: []})
+    return root[-1][leaf]
 """
 sa={'kml':[]}
 print(type(sa))

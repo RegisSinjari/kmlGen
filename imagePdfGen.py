@@ -5,14 +5,9 @@ def newfolder(leaf=None,root=None):
         return dict1['base'][-1][leaf]
     root.append({leaf: []})
     return root[-1][leaf]
-# a=newfolder(dict1['base'],'dd')
-# b=newfolder(a,'cc')
-# newfolder(a,'ee')
-# print(a)
-# print(b)
-# print(dict1)
 a=newfolder('dd')
-print(a)
 b=newfolder('pp',a)
-print(b)
+c=newfolder('ppee',a)
+d=newfolder('pdwp',b)
+newfolder('wewew',d)
 print(dict1)
