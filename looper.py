@@ -21,23 +21,27 @@ dicti={
    "kml":[
       {
          "kml3":[
-            "ee"
+            "point1","point2"
          ]
       },
       {
          "kml2":[
-            "ww"
+            "point3","point5"
          ]
       }
    ]
 }
 
 def looper(dir):
-    print(type(dir))
+    #print('run')
+    pointsa=''
+    #print(dir)
+    #print(type(dir))
     # if isinstance(dir, dict):
     #     for key in dir:
     #         print(f'added init{key}')
     for key in dir:
+
         if isinstance(dir,dict):
             #print(f'added init{key}')
             # print(dir[key])
@@ -46,15 +50,20 @@ def looper(dir):
             if len(dir[key]) > 0:
                 # print('len > 0')
                 print(f'added init{key}')
+                pointsa = ''
                 for a in dir[key]:
                     # print('a')
                     # print(a)
                     if isinstance(a, dict):
-                        print('ktu')
+                        #print('ktu')
                         looper(a)
-                    elif isinstance(a, list):
-                        print('lista?')
-                        looper(a)
+                    # elif isinstance(a, list):
+                    #     print('lista?')
+                    #     looper(a)
+                    elif isinstance(a,str):
+                        pointsa +=str(a)
+                        #print('u futa')
+                print(pointsa)
                 print(f'end{key}')
                 #folder end
             else:
