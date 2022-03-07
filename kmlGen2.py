@@ -30,81 +30,81 @@ def newfolder(leaf=None,root=None):
     root.append({leaf: []})
     return root[-1][leaf]
 """
-sa={'kml':[]}
-print(type(sa))
-sa['kml'].append({'kml3': ['ee']})
-#print(sa)
-sa['kml'].append({'kml2': ['ww']})
+# sa={'kml':[]}
+# print(type(sa))
+# sa['kml'].append({'kml3': ['ee']})
+# #print(sa)
 # sa['kml'].append({'kml2': ['ww']})
-print(sa)
-print(sa['kml'][0]['kml3'])
-print('----------')
-# >>> for key in a_dict:
-# ...     print(key, '->', a_dict[key])
-atexti=''
-
-
-
-def looper(dir):
-    for key in dir:
-        print(dir[key])
-        print(len(dir[key]))
-        if len(dir[key]) > 0:
-            print('len > 0')
-            for a in dir[key]:
-                print('a')
-                print(a)
-                if isinstance(a, dict):
-                    looper(a)
-        else:
-            break
-looper(sa)
-
-# for key in sa:# loop kap vtm kml dhe t con n list
-#     print('kti')
-#     print(sa[key])#kjo gjen listen boshe
-#     #nqs eshte list boshe ska nevoje te shtoje foldera, direkt pika ama nqs gjen dicta
-#     if len(sa[key])>0:
-#         looper(sa[key])
-#     else : break
+# # sa['kml'].append({'kml2': ['ww']})
+# print(sa)
+# print(sa['kml'][0]['kml3'])
+# print('----------')
+# # >>> for key in a_dict:
+# # ...     print(key, '->', a_dict[key])
+# atexti=''
 #
-#     for a in sa.get(key):
-#         if isinstance(a, dict):
-#         #     print(a)
-#         #     print('a is dic') #ktu posto x folder
-#         #     atexti += 'elostart'
-#         #     atexti += 'eloend'
-#             for key in a:
-#                 print(a.get(key))
-
-def inserter(base,path,what):
-    for a in base:
-        b=a.get(path,False)
-        if b:
-            print(b)
-
-def newfolder(root,leaf=None):
-    if leaf is None:
-        #just append to root
-        ...
-    #else append leaf to root
-    #then return ku vete
-    return eval('dictLocation')
-#make it so that initiated first will just append to base
-#but if calling it again it will append to the
-a=newfolder('name')#appends to base
-
-b=newfolder(a,'ds')
-c=newfolder(b,'ui')
-newfolder(a,'dd')
-print(a)
-print('^^^^^^^^^')
-for a in sa['kml']:
-    ee=a.get('kml3')
-    print(ee)
-    print(a)
-inserter(sa['kml'],'kml3','eeeeppp')
-print('--*-*-*-*-*-')
+#
+#
+# def looper(dir):
+#     for key in dir:
+#         print(dir[key])
+#         print(len(dir[key]))
+#         if len(dir[key]) > 0:
+#             print('len > 0')
+#             for a in dir[key]:
+#                 print('a')
+#                 print(a)
+#                 if isinstance(a, dict):
+#                     looper(a)
+#         else:
+#             break
+# looper(sa)
+#
+# # for key in sa:# loop kap vtm kml dhe t con n list
+# #     print('kti')
+# #     print(sa[key])#kjo gjen listen boshe
+# #     #nqs eshte list boshe ska nevoje te shtoje foldera, direkt pika ama nqs gjen dicta
+# #     if len(sa[key])>0:
+# #         looper(sa[key])
+# #     else : break
+# #
+# #     for a in sa.get(key):
+# #         if isinstance(a, dict):
+# #         #     print(a)
+# #         #     print('a is dic') #ktu posto x folder
+# #         #     atexti += 'elostart'
+# #         #     atexti += 'eloend'
+# #             for key in a:
+# #                 print(a.get(key))
+#
+# def inserter(base,path,what):
+#     for a in base:
+#         b=a.get(path,False)
+#         if b:
+#             print(b)
+#
+# def newfolder(root,leaf=None):
+#     if leaf is None:
+#         #just append to root
+#         ...
+#     #else append leaf to root
+#     #then return ku vete
+#     return eval('dictLocation')
+# #make it so that initiated first will just append to base
+# #but if calling it again it will append to the
+# a=newfolder('name')#appends to base
+#
+# b=newfolder(a,'ds')
+# c=newfolder(b,'ui')
+# newfolder(a,'dd')
+# print(a)
+# print('^^^^^^^^^')
+# for a in sa['kml']:
+#     ee=a.get('kml3')
+#     print(ee)
+#     print(a)
+# inserter(sa['kml'],'kml3','eeeeppp')
+# print('--*-*-*-*-*-')
 class kmlGen2:
     def __init__(self,file_name=None):
         if file_name is None:
@@ -145,31 +145,60 @@ class kmlGen2:
 	</Style>"""
         self.endXml = """</Document></kml>"""
         self.finale=...
-    def mergeInit(self,name,id):
+        self.folderPoints=''
+    def mergeInit(self,name):
         # < Folder id = {id} >< name > {name} < / name >
-        return f'<Folder id = {id}><name>{name}</name>'
-    def mergeEnd(self,name):
+        return f'<Folder><name>{name}</name>'
+    def mergeEnd(self):
         return '</Folder>'
 
+    def looper(self,dir):
+        idkeys=1
+        pointsa = ''
+        for key in dir:
+            if isinstance(dir, dict):
+                if len(dir[key]) > 0:
+                    print(f'added init{key}')
+                    self.folderPoints+=self.mergeInit(key)
+                    idkeys+=1
+                    pointsa = ''
+                    for a in dir[key]:
+                        if isinstance(a, dict):
+                            self.looper(a)
+                        elif isinstance(a, str):
+                            pointsa += str(a)
+                    print(pointsa)
+                    self.folderPoints+=pointsa
+                    self.folderPoints +=self.mergeEnd()
+                    print(f'end{key}')
+                else:
+                    print(type(key))
+            else:
+                break
     def convert(self):
         ...
 
-    def addPoint(self,name,lat,long,folder='kml'):
+    def addPoint(self,lat,long,root,name):
         #self.baseFile[folder].append({point:(lat:x,long:y,name:'d')})
-        self.baseFile[folder].append(f"<Placemark><name>{name}</name><styleUrl>#m_ylw-pushpin</styleUrl><Point><gx:drawOrder>1</gx:drawOrder><coordinates>{lat},{long},0</coordinates></Point></Placemark>")
+        root.append(f"<Placemark><name>{name}</name><styleUrl>#m_ylw-pushpin</styleUrl><Point><gx:drawOrder>1</gx:drawOrder><coordinates>{lat},{long},0</coordinates></Point></Placemark>")
 
-    def addFolder(self,name,folder='kml'):
-        self.baseFile[folder].append({name:[]})
+    def newfolder(self,leaf=None, root=None):
+        if root is None:
+            self.baseFile['kml'].append({leaf: []})
+            return self.baseFile['kml'][-1][leaf]
+        root.append({leaf: []})
+        return root[-1][leaf]
 
     def constructor(self):
-        #pointsa=''.join([a for a in self.listPoints])
-        pointsa=''
-        #loop all elements in dict
-
-
-        self.final=self.initial+pointsa+self.endXml
+        self.looper(self.baseFile)
+        self.final=self.initial+self.folderPoints+self.endXml
 
     def save(self):
         self.constructor()
         with open(self.file_name+'.kml', 'w') as myFile:
             myFile.write(self.final)
+
+kmlnew=kmlGen2(file_name='test2')
+a=kmlnew.newfolder('dd')
+kmlnew.addPoint(3.816419857518891, 47.67153553396173,a,'test')
+kmlnew.save()

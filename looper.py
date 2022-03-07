@@ -21,7 +21,11 @@ dicti={
    "kml":[
       {
          "kml3":[
-            "point1","point2"
+            "point1","point2",{
+         "kml4":[
+            "point6","point7"
+         ]
+      }
          ]
       },
       {
@@ -69,19 +73,19 @@ def looper(dir):
             else:
                 print(type(key))
                 # just add /folder with dir name
-        elif isinstance(dir,list):
-            print('list')
-            if len(dir) > 0:
-                #loop all points and just append to filewrite
-                #pointsa = ''.join([a for a in dir])
-                print('added allpoints')
-            else:
-                print('break')
-                print(type(dir))
-                break
+        # elif isinstance(dir,list):
+        #     print('list')
+        #     if len(dir) > 0:
+        #         #loop all points and just append to filewrite
+        #         #pointsa = ''.join([a for a in dir])
+        #         print('added allpoints')
+        #     else:
+        #         print('break')
+        #         print(type(dir))
+        #         break
         else:
-            print('break')
-            print(type(key))
+            # print('break')
+            # print(type(key))
             break
 
 looper(dicti)
